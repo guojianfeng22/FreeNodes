@@ -10,10 +10,13 @@ from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 
 from Config import Decryption
 from PwdFinder import find_pwd
 from RequestHandler import make_request
+
+
 
 
 # def gen_elem(markup: str, element="", attrs=None) -> Generator[Tag, None, None]:
@@ -73,6 +76,12 @@ class NodeScraper:
     def init_webdriver(self):
         """虚拟浏览器初始化"""
         options = webdriver.ChromeOptions()
+        options.add_argument('lang=en') 
+        options.add_argument('--headless') 
+        options.add_argument('--no-sandbox')
+        options.add_argument('--single-process')
+        options.add_argument('--disable-dev-shm-usage')
+      
         options.add_argument("--headless")  # 启用无头模式
         options.add_argument("--pageLoadStrategy=eager")
         self.driver = webdriver.Chrome(options)  # 创建浏览器实例
